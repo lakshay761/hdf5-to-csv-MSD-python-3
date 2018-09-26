@@ -73,7 +73,7 @@ class Song:
         self.timeSignatureConfidence = None
         self.title = None
         self.year = None
-
+        self.song_hotttnesss = None
     def displaySongCount(self):
         print("Total Song Count",Song.songCount)
 
@@ -172,7 +172,7 @@ def main():
         csvRowString = ("SongID,AlbumID,AlbumName,ArtistID,ArtistLatitude,ArtistLocation,"+
             "ArtistLongitude,ArtistName,Danceability,Duration,KeySignature,"+
             "KeySignatureConfidence,Tempo,TimeSignature,TimeSignatureConfidence,"+
-            "Title,Year")
+            "Title,Year,song_hotttnesss")
         #################################################
 
         csvAttributeList = re.split('\W+', csvRowString)
@@ -223,7 +223,7 @@ def main():
             song.timeSignatureConfidence = str(hdf5_getters.get_time_signature_confidence(songH5File))
             song.title = str(hdf5_getters.get_title(songH5File))
             song.year = str(hdf5_getters.get_year(songH5File))
-
+            song.song_hotttnesss = str(hdf5_getters.get_song_hotttnesss(songH5File))
             #print song count
             csvRowString += str(song.songCount) + ","
 
@@ -277,6 +277,8 @@ def main():
                     csvRowString += "\"" + song.title + "\""
                 elif attribute == 'Year'.lower():
                     csvRowString += song.year
+                elif attribute == 'song_hotttnesss'.lower():
+                    csvRowString += song.song_hotttnesss
                 else:
                     csvRowString += "Erm. This didn't work. Error. :( :(\n"
 
